@@ -1,0 +1,13 @@
+# This file contains values from Cookiecutter
+
+default_context:
+  project_name: "bankapp"
+  project_description: "bankapp is a practice project in python to set up a bank model with entities such as customers and employees and services and methods."
+  organization: "bankapp"
+  license: "MIT"
+  minimal_python_version: 3.7
+  github_name: "bankapp"
+  email: "shaizam_shaikh@yahoo.ca"
+  version: "0.1.0"
+  line_length: "88"
+  create_example_template: "cli"
