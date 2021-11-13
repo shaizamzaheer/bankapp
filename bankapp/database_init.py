@@ -1,37 +1,73 @@
 #%%
 # Using https://docs.sqlalchemy.org/en/20/tutorial/index.html
 
-# create initial sqlite db
+# create initial sqlite db and ORM
 import logging
-import attr
-from sqlalchemy import create_engine, text, MetaData, Column, Table, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import registry
+from pathlib import Path
 
-engine = create_engine("sqlite:///foo.db", echo=True, future=True)
+from sqlalchemy import (
+    Column,
+    ForeignKey,
+    Integer,
+    MetaData,
+    String,
+    Table,
+    create_engine,
+    Session,
+)
+from sqlalchemy.orm import declarative_base
+from sqlalchemy_utils import PhoneNumber
 
-mapper_registry = registry()
 
+def initialize_db() -> None:
+    """
+    Create the Database if it doesn't exist, put in some sample Data
 
-@mapper_registry.mapped
-@attr.s
-class User:
-    __table__ = Table(
-        "user",
-        mapper_registry.metadata,
+    Parameters: None
+
+    Return: None
+    """
+
+    DB = "banking.sqlite"
+    db_path = Path(Path(__file__).parent, DB)
+
+    if db_path.exists():
+        db_path.unlink()
+
+    bankapp_folder = str(Path(__file__).parent)
+    db_connect_string = f"sqlite:///{bankapp_folder}/{DB}"
+
+    # future = true allows sqlalchemy 2.0 syntax use
+    engine = create_engine(db_connect_string, echo=True, future=True)
+    meta = MetaData()
+    Base = declarative_base()
+
+    person_table = Table(
+        "Person",
+        meta,
         Column("id", Integer, primary_key=True),
-        Column("name", String(50)),
+        Column("first_name", String, nullable=False),
+        Column("last_name", String, nullable=False),
+        Column("address", String),
+        Column("phone,", PhoneNumber),
     )
-    id = attr.ib()
-    name = attr.ib()
 
-
-with engine.connect() as conn:
-    conn.execute(text("CREATE TABLE user (x int, y int)"))
-    conn.execute(
-        text("INSERT INTO user (x, y) VALUES (:x, :y)"),
-        [{"x": 1, "y": "dkfj"}, {"x": 2, "y": "dkfdk"}],
+    customer_table = Table(
+        "Customer",
+        meta,
+        Column("c_id", Integer, primary_key=True),
+        Column("p_id", ForeignKey("Person.id"), nullable=False),
+        Column("branch,", String),
     )
-    conn.commit()
+
+    employee_table = Table(
+        "Employee",
+        meta,
+        Column("e_id", Integer, primary_key=True),
+        Column("role", String, nullable=False),
+    )
+
+    meta.create_all(engine)
+
 
 # %%
