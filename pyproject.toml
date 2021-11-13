@@ -14,7 +14,7 @@ repository = "https://github.com/bankapp/bankapp"
 homepage = "https://github.com/bankapp/bankapp"
 
 # Keywords description https://python-poetry.org/docs/pyproject/#keywords
-keywords = []  #! Update me
+keywords = ["Practice"]  #! Update me
 
 # Pypi classifiers: https://pypi.org/classifiers/
 classifiers = [  #! Update me
@@ -38,6 +38,8 @@ python = "^3.7"
 importlib_metadata = {version = "^4.5.0", python = "<3.8"}
 typer = {extras = ["all"], version = "^0.4.0"}
 rich = "^10.7.0"
+SQLAlchemy = "^1.4.26"
+pyupgrade = "^2.29.0"
 
 [tool.poetry.dev-dependencies]
 bandit = "^1.7.0"
@@ -75,18 +77,18 @@ exclude = '''
 )/
 '''
 
-[tool.isort]
-# https://github.com/timothycrosley/isort/
-py_version = 37
-line_length = 88
+# [tool.isort]
+# # https://github.com/timothycrosley/isort/
+# py_version = 37
+# line_length = 88
 
-known_typing = ["typing", "types", "typing_extensions", "mypy", "mypy_extensions"]
-sections = ["FUTURE", "TYPING", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
-include_trailing_comma = true
-profile = "black"
-multi_line_output = 3
-indent = 4
-color_output = true
+# known_typing = ["typing", "types", "typing_extensions", "mypy", "mypy_extensions"]
+# sections = ["FUTURE", "TYPING", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+# include_trailing_comma = true
+# profile = "black"
+# multi_line_output = 3
+# indent = 4
+# color_output = true
 
 [tool.mypy]
 # https://mypy.readthedocs.io/en/latest/config_file.html#using-a-pyproject-toml-file
