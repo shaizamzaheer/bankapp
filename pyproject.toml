@@ -39,7 +39,7 @@ importlib_metadata = {version = "^4.5.0", python = "<3.8"}
 typer = {extras = ["all"], version = "^0.4.0"}
 rich = "^10.7.0"
 SQLAlchemy = "^1.4.26"
-pyupgrade = "^2.29.0"
+pyupgrade = "^2.29.1"
 SQLAlchemy-Utils = "^0.37.9"
 
 [tool.poetry.dev-dependencies]
