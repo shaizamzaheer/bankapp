@@ -64,10 +64,16 @@ def initialize_db() -> None:
         "Employee",
         meta,
         Column("e_id", Integer, primary_key=True),
+        Column("p_id", ForeignKey("Person.id"), nullable=False),
         Column("role", String, nullable=False),
     )
 
+    accounts_table = Table(
+        "Account",
+        meta,
+        Column("acc_id", Integer, primary_key=True),
+        Column("c_id", ForeignKey("Person.id"), nullable=False),
+        Column("acc_type", String, nullable=False),
+    )
+
     meta.create_all(engine)
-
-
-# %%
