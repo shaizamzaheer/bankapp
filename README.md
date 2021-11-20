@@ -38,13 +38,19 @@ make poetry-download
 make install
 ```
 
-4. Run the codestyle:
+4. Initialize the Database with sample data
+
+```bash
+make db-init
+```
+
+5. Run the codestyle:
 
 ```bash
 make codestyle
 ```
 
-5.  Run help
+6.  Run help
 
 ```bash
 poetry run bankapp --help

@@ -26,6 +26,11 @@ install:
 pre-commit-install:
 	poetry run pre-commit install
 
+#* Set up DB
+.PHONY: db-init
+db-init:
+	poetry run python ./database_init.py
+
 #* Formatters
 .PHONY: codestyle
 codestyle:
