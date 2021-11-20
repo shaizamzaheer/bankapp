@@ -17,3 +17,4 @@ def get_version() -> str:
 
 
 version: str = get_version()
+max_amnt: int = 5000

@@ -42,19 +42,21 @@ make install
 
 ```bash
 make db-init
-```
-
-5. Run the codestyle:
-
-```bash
-make codestyle
-```
+````
 
 6.  Run help
 
 ```bash
 poetry run bankapp --help
 ```
+
+### Example Usage
+
+<p>
+
+poetry run bankapp
+
+</p>
 
 ### Makefile usage
 

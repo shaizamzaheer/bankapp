@@ -85,7 +85,7 @@ def initialize_db() -> None:
     )
 
     services_table = Table(
-        "Services",
+        "Service",
         meta,
         Column("serv_id", Integer, primary_key=True),
         Column("c_id", ForeignKey("Person.id"), nullable=False),
