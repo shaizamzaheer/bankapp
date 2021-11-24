@@ -11,6 +11,8 @@ from rich.console import Console
 from bankapp import version
 from bankapp.example import hello
 
+# session future is true
+
 
 class Color(str, Enum):
     white = "white"

@@ -2,7 +2,7 @@
 
 default_context:
   project_name: "bankapp"
-  project_description: "bankapp is a practice project in python to set up a bank model with entities such as customers and employees and services and methods."
+  project_description: "bankapp is a practice project in python to set up a bank model with entities such as customers, employees, services,and methods."
   organization: "bankapp"
   license: "MIT"
   minimal_python_version: 3.7

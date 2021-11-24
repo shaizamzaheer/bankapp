@@ -9,12 +9,15 @@
 [![Semantic Versions](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versions-e10079.svg)](https://github.com/bankapp/bankapp/releases)
 [![License](https://img.shields.io/badge/license-MIT-green)](./LICENSE)
 
-bankapp is a practice project in python to set up a bank model with entities such as customers and employees and services and methods.
+bankapp is a practice project in python to set up a bank model with entities such as customers, employees, services and records and some simple methods.
+
+The goal of the project was to simply create the schema and appropriately define classes and functions in an object-oriented approach. Personally, I used the project to dive deeper into some of the bells and whistles of cookie-cutter templates for modern python packaging, auto-cli tools, auto-dependency management, auto-config, and versioning.
 
 </div>
 
 ## Installation
 
+Running the cli-tool requires poetry, which should be installed once outside of any venvs.
 
 1. Clone the repository with git bash (or download from GitHub):
 
@@ -44,7 +47,7 @@ make install
 make db-init
 ````
 
-6.  Run help
+6.  Run help for full usage instructions
 
 ```bash
 poetry run bankapp --help

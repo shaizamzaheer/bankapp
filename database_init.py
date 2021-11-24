@@ -3,7 +3,8 @@
 
 # create initial sqlite db and ORM
 import logging
-from pathlib import Path
+from bankapp import db_path, db_connect_string
+from bankapp import Path
 
 from sqlalchemy import (
     Column,
@@ -36,14 +37,9 @@ def initialize_db() -> None:
     """
 
     # TODO: #26 refactor out details into config
-    bankapp_folder = Path(__file__).parent / "bankapp"
-    DB = "banking.sqlite"
-    db_path = bankapp_folder / DB
 
     if db_path.exists():
         db_path.unlink()
-
-    db_connect_string = f"sqlite:///{db_path}"
 
     # future = true allows sqlalchemy 2.0 syntax use
     engine = create_engine(db_connect_string, echo=False, future=True)
