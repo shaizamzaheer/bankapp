@@ -22,8 +22,8 @@ def get_version() -> str:
 
 version: str = get_version()
 
-# maximum amount (cents) that can be withdrawn or deposited
-max_amnt: int = 5000_00
+# maximum amount ($) that can be withdrawn or deposited
+max_amnt: int = 5000
 
 # prod db
 bankapp_folder = Path(__file__).parent

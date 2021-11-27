@@ -9,19 +9,7 @@ import typer
 from rich.console import Console
 
 from bankapp import version
-from bankapp.example import hello
-
-# session future is true
-
-
-class Color(str, Enum):
-    white = "white"
-    red = "red"
-    cyan = "cyan"
-    magenta = "magenta"
-    yellow = "yellow"
-    green = "green"
-
+from bankapp.bank_funcs import *
 
 app = typer.Typer(
     name="bankapp",
@@ -38,20 +26,14 @@ def version_callback(print_version: bool) -> None:
         raise typer.Exit()
 
 
+def account_callback(value: int) -> int:
+    if value != 2:
+        raise typer.BadParameter("Only Camila is allowed")
+    return value
+
+
 @app.callback()
-# @app.command(name="")
 def main(
-    #     name: str = typer.Option(
-    #          ...,
-    #      help="Person to greet."),
-    #     color: Optional[Color] = typer.Option(
-    #         None,
-    #         "-c",
-    #         "--color",
-    #         "--colour",
-    #         case_sensitive=False,
-    #         help="Color for print. If not specified then choice will be random.",
-    #     ),
     print_version: bool = typer.Option(
         None,
         "-v",
@@ -64,44 +46,51 @@ def main(
     return
 
 
-#     """Print a greeting with a giving name."""
-#     if color is None:
-#         color = choice(list(Color))
-
-#     greeting: str = hello(name)
-#     console.print(f"[bold {color}]{greeting}[/]")
-
-# app = typer.Typer()
-items_app = typer.Typer()
-app.add_typer(items_app, name="items")
+# how to add commands as sub commands - create new apps
+accounts_app = typer.Typer()
+app.add_typer(accounts_app, name="accounts")
 users_app = typer.Typer()
 app.add_typer(users_app, name="users")
 
 
-@items_app.command("create")
-def items_create(item: str):
-    typer.echo(f"Creating item: {item}")
+@accounts_app.command("create")
+def accounts_create(item: str):
+    console.print(f"Creating item: {item}")
 
 
-@items_app.command("delete")
-def items_delete(item: str):
-    typer.echo(f"Deleting item: {item}")
+@accounts_app.command("delete")
+def accounts_delete(item: str):
+    console.print(f"Deleting item: {item}")
 
 
-@items_app.command("sell")
-def items_sell(item: str):
-    typer.echo(f"Selling item: {item}")
+@accounts_app.command("deposit")
+def accounts_deposit(
+    account: int = typer.Option(
+        ..., "-acc", prompt="Enter account id", callback=account_callback
+    ),
+    amt: int = typer.Option(..., "-amt", prompt="Enter amt id"),
+) -> None:
+    console.print(f"Depositing: ${amt} to account {account}")
+    deposit(account, amt)
+
+
+@accounts_app.command("withdraw")
+def accounts_withdraw(account: int, amt: int):
+    console.print(f"Withdrawing: ${amt} from account {account}")
+    withdraw(account, amt)
 
 
 @users_app.command("create")
 def users_create(user_name: str):
-    typer.echo(f"Creating user: {user_name}")
+    console.print(f"Creating user: {user_name}")
 
 
 @users_app.command("delete")
 def users_delete(user_name: str):
-    typer.echo(f"Deleting user: {user_name}")
+    console.print(f"Deleting user: {user_name}")
 
 
 if __name__ == "__main__":
     app()
+
+# %%

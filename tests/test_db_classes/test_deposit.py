@@ -4,15 +4,23 @@
 from bankapp.bank_funcs import deposit
 from sqlalchemy import select
 from bankapp.db_classes import Account
+import pytest
 
 
-def test_deposit(dbsession):
-    deposit(account=1_000_001, amt=400)
+@pytest.mark.parametrize(
+    "acc,amount,expected",
+    [
+        (1_000_001, 400, 5400_00),
+        (1_000_001, 12000, 5000_00),
+    ],
+)
+def test_deposit(dbsession, acc, amount, expected):
+    deposit(account=acc, amt=amount)
     assert (
-        dbsession.execute(select(Account).where(Account.acc_id == 1_000_001))
+        dbsession.execute(select(Account).where(Account.acc_id == acc))
         .scalar_one()
         .balance_cents
-        == 5400_00
+        == expected
     )
 
 
