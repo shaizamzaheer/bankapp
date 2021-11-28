@@ -77,7 +77,8 @@ def withdraw(account: int, amt: int) -> None:
         print("Amount must not be negative")
     except AmtApprovalError:
         pass
-    except ValueError2:
+    except ValueError as e:
+        # how do i raise the same exception with a custom message in python
         print("Amount must be less than balance")
     except NoResultFound:
         print("Account not found")

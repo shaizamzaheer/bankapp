@@ -1,96 +1,99 @@
 #%%
 # type: ignore[attr-defined]
-from typing import Optional
 
-from enum import Enum
-from random import choice
-
-import typer
 from rich.console import Console
-
+import logging
 from bankapp import version
 from bankapp.bank_funcs import *
 
-app = typer.Typer(
-    name="bankapp",
-    help="bankapp is a practice project in python to set up a bank model with entities such as customers, employees, services and records and some simple methods.",
-    add_completion=False,
-)
+app = """
+    name: bankapp
+    help: bankapp is a practice project in python to set up a bank model with entities such as customers, employees, services and records and some simple methods.
+
+    Commands:
+        accounts
+        customers
+        employees
+        services
+        quit
+"""
 console = Console()
+console.print(f"[yellow]bankapp[/] version: [bold blue]{version}[/]")
 
 
-def version_callback(print_version: bool) -> None:
-    """Print the version of the package."""
-    if print_version:
-        console.print(f"[yellow]bankapp[/] version: [bold blue]{version}[/]")
-        raise typer.Exit()
+def main() -> None:
+    while True:
+        console.print(app)
+        mode = input("Enter command:")
+        if mode == "quit":
+            exit()
+        elif mode == "accounts":
+            console.print(accounts_command)
+        elif mode == "customers":
+            console.print(customer_command)
+        elif mode == "services":
+            pass
+        else:
+            console.print("Incorrect command")
 
 
-def account_callback(value: int) -> int:
-    if value != 2:
-        raise typer.BadParameter("Only Camila is allowed")
-    return value
+accounts_command = """
+Choose:
+1. create account
+2. delete account
+3. deposit
+4. withdraw
+5. quit
+"""
+customer_command = """
+Choose:
+1. customer create
+2. customer delete
+3. quit
+"""
+
+services_command = """
+1. approve loan
+2. quit
+"""
 
 
-@app.callback()
-def main(
-    print_version: bool = typer.Option(
-        None,
-        "-v",
-        "--version",
-        callback=version_callback,
-        is_eager=True,
-        help="Prints the version of the bankapp package.",
-    ),
-) -> None:
-    return
+def accounts_create(cust_id: int, type: str) -> None:
+    console.print(f"Creating account {type} for customer: {cust_id}")
 
 
-# how to add commands as sub commands - create new apps
-accounts_app = typer.Typer()
-app.add_typer(accounts_app, name="accounts")
-users_app = typer.Typer()
-app.add_typer(users_app, name="users")
+def accounts_delete(acc_id: str) -> None:
+    console.print(f"Deleting account: {acc_id}")
 
 
-@accounts_app.command("create")
-def accounts_create(item: str):
-    console.print(f"Creating item: {item}")
-
-
-@accounts_app.command("delete")
-def accounts_delete(item: str):
-    console.print(f"Deleting item: {item}")
-
-
-@accounts_app.command("deposit")
 def accounts_deposit(
-    account: int = typer.Option(
-        ..., "-acc", prompt="Enter account id", callback=account_callback
-    ),
-    amt: int = typer.Option(..., "-amt", prompt="Enter amt id"),
+    account: int,
+    amt: int,
 ) -> None:
     console.print(f"Depositing: ${amt} to account {account}")
     deposit(account, amt)
 
 
-@accounts_app.command("withdraw")
-def accounts_withdraw(account: int, amt: int):
+def accounts_withdraw(account: int, amt: int) -> None:
     console.print(f"Withdrawing: ${amt} from account {account}")
     withdraw(account, amt)
 
 
-@users_app.command("create")
-def users_create(user_name: str):
-    console.print(f"Creating user: {user_name}")
+def customers_create(
+    id: int,
+):
+    console.print(f"Creating user: {id}")
 
 
-@users_app.command("delete")
-def users_delete(user_name: str):
-    console.print(f"Deleting user: {user_name}")
+def customer_delete(id: int):
+    console.print(f"Deleting user: {id}")
+
+
+def approve_loan(s_id: int):
+    console.print(f"Approving loan: {s_id}")
 
 
 if __name__ == "__main__":
-    app()
+    main()
 
 # %%
