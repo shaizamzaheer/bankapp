@@ -36,7 +36,7 @@ classifiers = [  #! Update me
 [tool.poetry.dependencies]
 python = "^3.7"
 importlib_metadata = {version = "^4.8.2", python = "<3.8"}
-rich = "^10.7.0"
+rich = "^10.15.2"
 SQLAlchemy = "^1.4.27"
 pyupgrade = "^2.29.1"
 SQLAlchemy-Utils = "^0.37.9"
