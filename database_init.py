@@ -75,7 +75,7 @@ def initialize_db() -> None:
         "Account",
         meta,
         Column("acc_id", Integer, primary_key=True),
-        Column("c_id", ForeignKey("Person.id"), nullable=False),
+        Column("c_id", ForeignKey("Customer.c_id"), nullable=False),
         Column("acc_type", String, nullable=False),
         Column("balance_cents", Integer),
     )
@@ -84,7 +84,7 @@ def initialize_db() -> None:
         "Service",
         meta,
         Column("serv_id", Integer, primary_key=True),
-        Column("c_id", ForeignKey("Person.id"), nullable=False),
+        Column("c_id", ForeignKey("Customer.c_id"), nullable=False),
         Column("serv_type", String, nullable=False),
         Column("approved", Integer),
     )

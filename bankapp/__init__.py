@@ -22,8 +22,8 @@ def get_version() -> str:
 
 version: str = get_version()
 
-# maximum amount (cents) that can be withdrawn or deposited
-max_amnt: int = 5000_00
+# maximum amount ($) that can be withdrawn or deposited
+max_amnt: int = 5000
 
 # prod db
 bankapp_folder = Path(__file__).parent
@@ -33,4 +33,3 @@ db_connect_string = f"sqlite:///{db_path}"
 engine = create_engine(db_connect_string, echo=False, future=True)
 Session = sessionmaker(bind=engine)
 session = Session()
-# %%
