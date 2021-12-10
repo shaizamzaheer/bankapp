@@ -1,6 +1,6 @@
 from bankapp.bank_funcs import withdraw
 from sqlalchemy import select
-from bankapp.db_classes import Account
+from bankapp.models import Account
 import pytest
 
 

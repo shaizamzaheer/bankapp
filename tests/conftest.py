@@ -2,7 +2,7 @@
 #%%
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from bankapp.db_classes import Base
+from bankapp.models import Base
 from bankapp import db_path
 import pytest
 import database_init

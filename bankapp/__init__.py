@@ -33,4 +33,3 @@ db_connect_string = f"sqlite:///{db_path}"
 engine = create_engine(db_connect_string, echo=False, future=True)
 Session = sessionmaker(bind=engine)
 session = Session()
-# %%

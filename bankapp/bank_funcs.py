@@ -1,8 +1,8 @@
 #%%
 # functions for program access
 from bankapp import max_amnt, session
-from bankapp.db_classes import *
-from sqlalchemy import select
+from bankapp.models import *
+from sqlalchemy import select, exists, update
 from sqlalchemy.orm.exc import NoResultFound
 
 
@@ -55,11 +55,11 @@ def deposit(account: int, amt: int) -> None:
 
 def withdraw(account: int, amt: int) -> None:
     """decrease the balance with the amount specified.
-    Args:
     account id,
     amount to withdraw: $
     """
     try:
+        amt = int(amt)
         # get current acc value
         acc = session.execute(
             select(Account).where(Account.acc_id == account)
@@ -82,3 +82,64 @@ def withdraw(account: int, amt: int) -> None:
         print("Amount must be less than balance")
     except NoResultFound:
         print("Account not found")
+
+
+def add_account(cust_id: int, type: str) -> Account.acc_id:
+    cust_id = int(cust_id)
+    """Add an account for a specific user
+    returns account object"""
+    acc = Account(c_id=cust_id, acc_type=type, balance_cents=0)
+    session.add(acc)
+    session.commit()
+    return acc.acc_id
+
+
+def delete_account(ac_id) -> None:
+    """Delete bank account given id"""
+    try:
+        acc = session.query(Account).filter(Account.acc_id == ac_id).first()
+        session.delete(acc)
+        session.commit()
+    except NoResultFound:
+        print("Account not found")
+
+
+def add_customer(_fname: str, _lname: str, _addr: str, _phone: str) -> Customer.c_id:
+    """Add an customer given fname, lname, address, and phone #"""
+    stmt = (
+        (Person.first_name == _fname)
+        & (Person.last_name == _lname)
+        & (Person.address == _addr)
+        & (Person.phone == _phone)
+    )
+    # add to person table first if it's not there
+    if not session.query(exists().where(stmt)).scalar():
+        per = Person(first_name=_fname, last_name=_lname, address=_addr, phone=_phone)
+        session.add(per)
+        session.commit()
+        _p_id = per.id
+    else:
+        _p_id = session.query(Person.id).filter(stmt).scalar()
+
+    session.add(Customer(p_id=_p_id))
+    session.commit()
+
+
+def delete_customer(cust_id: int) -> None:
+    """Delete customer given id"""
+    try:
+        cust = session.query(Customer).filter(Customer.c_id == cust_id).first()
+        session.delete(cust)
+        session.commit()
+    except NoResultFound:
+        print("Customer not found")
+
+
+def loan_approval(s_id: int):
+    """given a service_id, approve the loan"""
+    try:
+        serv = session.query(Service).get(s_id)
+        serv.approved = 1
+        session.commit()
+    except NoResultFound:
+        print("Customer not found")
