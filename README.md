@@ -25,7 +25,7 @@ Running the cli-tool requires poetry, which should be installed once outside of 
 git clone https://github.com/shaizamzaheer/bankapp.git
 ```
 
-2. If you don't have `Poetry` installed run:
+2. (Optional) If you don't have `Poetry` installed run:
 
 ```bash
 make poetry-download
@@ -35,7 +35,7 @@ make poetry-download
 
 <p>
 
-3. Initialize poetry 
+3. (Optional) Initialize poetry 
 
 ```bash
 make install
@@ -47,17 +47,17 @@ make install
 make db-init
 ````
 
-6.  Run help for full usage instructions
-
-```bash
-poetry run bankapp --help
-```
-
 ### Example Usage
 
 <p>
 
-poetry run bankapp
+>python bankapp
+  >1
+  >1
+  >my_first_name
+  >my_last_name
+  >my_address
+  >1119991020
 
 </p>
 
