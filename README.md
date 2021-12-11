@@ -50,14 +50,16 @@ make db-init
 ### Example Usage
 
 <p>
-
->python bankapp
-  >1
-  >1
-  >my_first_name
-  >my_last_name
-  >my_address
-  >1119991020
+  
+```bash
+python bankapp
+1
+1
+my_first_name
+my_last_name
+my_address
+1119991020
+````
 
 </p>
 
