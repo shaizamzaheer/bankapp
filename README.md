@@ -17,7 +17,7 @@ The goal of the project was to simply create the schema and appropriately define
 
 ## Installation
 
-Running the cli-tool requires poetry, which should be installed once outside of any venvs.
+Poetry is optional. It should be installed once outside of any venvs.
 
 1. Clone the repository with git bash (or download from GitHub):
 
