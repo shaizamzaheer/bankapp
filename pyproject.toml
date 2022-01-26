@@ -44,7 +44,7 @@ phonenumbers = "^8.12.37"
 argparse = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
-bandit = "^1.7.1"
+bandit = "^1.7.2"
 black = {version = "^21.7b0", allow-prereleases = true}
 darglint = "^1.8.0"
 isort = {extras = ["colors"], version = "^5.10.1"}
