@@ -38,7 +38,7 @@ python = "^3.7"
 importlib_metadata = {version = "^4.8.2", python = "<3.8"}
 rich = "^10.7.0"
 SQLAlchemy = "^1.4.27"
-pyupgrade = "^2.29.1"
+pyupgrade = "^3.2.3"
 SQLAlchemy-Utils = "^0.37.9"
 phonenumbers = "^8.12.37"
 argparse = "^1.4.0"
