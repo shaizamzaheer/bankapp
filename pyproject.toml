@@ -40,7 +40,7 @@ rich = "^10.7.0"
 SQLAlchemy = "^1.4.27"
 pyupgrade = "^2.29.1"
 SQLAlchemy-Utils = "^0.37.9"
-phonenumbers = "^8.12.37"
+phonenumbers = "^8.13.3"
 argparse = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
